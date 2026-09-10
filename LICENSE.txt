@@ -1,0 +1,3 @@
+Copyright © 2026 ThaynaBDSTec. Todos os direitos reservados.
+
+Este projeto é disponibilizado para fins educacionais e de apresentação do desafio do Bootcamp DIO: Java AI Copilot. Nenhuma licença de uso, cópia, modificação, distribuição ou exploração comercial é concedida além das permissões expressamente necessárias para visualizar o repositório público, salvo autorização escrita da titular dos direitos.
