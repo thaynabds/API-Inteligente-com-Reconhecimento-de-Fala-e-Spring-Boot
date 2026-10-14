@@ -4,6 +4,32 @@ API REST inteligente para gerenciamento de transações financeiras, construída
 
 > Projeto desenvolvido para o **Bootcamp DIO: Java AI Copilot — 10 de setembro de 2026**.
 
+## Rodar as transações sem chave de IA
+
+Requisito: Java 21.
+
+```bash
+./gradlew test
+./gradlew bootRun --args='--spring.profiles.active=local'
+```
+
+A API sobe em `http://localhost:8080` com banco H2, arquivo local em `data/`. Os endpoints de transação funcionam. Os endpoints `/api/assistant` ficam desligados nesse modo.
+
+Exemplo:
+
+```bash
+curl -X POST http://localhost:8080/api/transactions \
+  -H 'Content-Type: application/json' \
+  -d '{"description":"Supermercado","amount":185.90,"type":"EXPENSE","category":"alimentação","date":"2026-09-10"}'
+```
+
+Para ligar voz e texto com a OpenAI, suba o MySQL e use o perfil `ai`, com `OPENAI_API_KEY` no ambiente:
+
+```bash
+docker compose up -d mysql
+./gradlew bootRun --args='--spring.profiles.active=ai'
+```
+
 ## ✨ Destaques
 
 - 🎙️ **Speech-to-Text:** recebe áudio e transforma fala em texto.
@@ -74,7 +100,7 @@ MP3 + resposta
 
 | Tecnologia | Uso |
 |---|---|
-| Java 25 | Linguagem e runtime |
+| Java 21 | Linguagem e runtime |
 | Spring Boot 4.1.1 | Framework da API |
 | Spring AI 2.0.1 | IA generativa e áudio |
 | OpenAI | Chat, transcrição e síntese de voz |
@@ -89,7 +115,7 @@ As versões adotadas foram atualizadas em relação ao projeto-base da trilha: o
 
 ## 🚀 Pré-requisitos
 
-- JDK 25 instalado.
+- JDK 21 instalado.
 - Gradle 9+ disponível no PATH.
 - Docker e Docker Compose.
 - Uma chave de API da OpenAI.

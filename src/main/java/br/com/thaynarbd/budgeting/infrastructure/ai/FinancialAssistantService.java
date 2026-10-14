@@ -4,6 +4,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.audio.tts.TextToSpeechModel;
 import org.springframework.ai.audio.transcription.TranscriptionModel;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.Base64;
 
 @Service
+@ConditionalOnProperty(prefix = "app.ai", name = "enabled", havingValue = "true")
 public class FinancialAssistantService {
     private static final String SYSTEM_PROMPT = """
             Você é o assistente financeiro do projeto Budgeting AI.

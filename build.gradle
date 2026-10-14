@@ -10,7 +10,7 @@ description = 'API inteligente de orçamento financeiro com Spring AI e reconhec
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(25)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -31,6 +31,7 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
+    runtimeOnly 'com.h2database:h2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

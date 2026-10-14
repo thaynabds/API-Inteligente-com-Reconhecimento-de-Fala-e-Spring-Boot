@@ -2,6 +2,7 @@ package br.com.thaynarbd.budgeting.infrastructure.web;
 
 import br.com.thaynarbd.budgeting.infrastructure.ai.AssistantResponse;
 import br.com.thaynarbd.budgeting.infrastructure.ai.FinancialAssistantService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/assistant")
+@ConditionalOnProperty(prefix = "app.ai", name = "enabled", havingValue = "true")
 public class AssistantController {
     private final FinancialAssistantService assistant;
     public AssistantController(FinancialAssistantService assistant) { this.assistant = assistant; }
