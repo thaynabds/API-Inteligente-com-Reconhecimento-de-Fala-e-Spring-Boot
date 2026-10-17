@@ -1,15 +1,17 @@
-FROM eclipse-temurin:21-jdk-alpine AS build
+FROM eclipse-temurin:21-jdk AS build
 WORKDIR /app
 COPY gradlew .
 COPY gradle gradle
 COPY build.gradle settings.gradle .
-RUN chmod +x gradlew && ./gradlew dependencies --no-daemon -q || true
 COPY src ./src
-RUN ./gradlew clean bootJar -x test --no-daemon
+RUN chmod +x gradlew \
+    && ./gradlew --no-daemon bootJar -x test \
+    && find build/libs -type f -name '*.jar' ! -name '*-plain.jar' -exec cp {} /tmp/app.jar \; \
+    && test -s /tmp/app.jar
 
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:21-jre
 WORKDIR /app
-COPY --from=build /app/build/libs/*.jar app.jar
+COPY --from=build /tmp/app.jar app.jar
 EXPOSE 8080
 ENV SPRING_PROFILES_ACTIVE=render
 ENTRYPOINT ["java", "-jar", "app.jar"]
